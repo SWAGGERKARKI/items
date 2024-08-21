@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9g-challenge</title>
+    <style>
+      .calculate-button {
+        background-color: black;
+        color: white;
+      }
+
+      .order-brief {
+        border: 1px solid black;
+        border-radius: 4px;
+        padding: 5px;
+        display: inline-block;
+      }
+
+      .flex-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex-container">
+      <p class="order-brief">Order above $40 = FREE delivery</p>
+      <p class="order-brief">Order below $40 = +$10 delivery</p>
+      <div class="one">
+        <input
+          type="text"
+          placeholder="Enter cost"
+          class="js-cost"
+          onkeyup="if (event.key === 'Enter') { calculate();}"
+        />
+        <button onclick="calculate();" class="calculate-button">
+          Calculate
+        </button>
+      </div>
+      <p class="js-total-cost"></p>
+    </div>
+
+    <script>
+      function calculate() {
+        const costElement = document.querySelector(".js-cost");
+        let cost = Number(costElement.value);
+
+        if (cost === 0) {
+          alert("Pleas enter a number");
+          return null;
+        } else if (cost < 40) {
+          cost = cost + 10;
+        }
+
+        document.querySelector(".js-total-cost").innerHTML = `$${cost.toFixed(
+          2
+        )}`;
+      }
+    </script>
+  </body>
+</html>
